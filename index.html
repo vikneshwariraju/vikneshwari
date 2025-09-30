@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Vikneshwari (SPA)</title>
+<!-- Load Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<style>
+    /* Configure custom styles and colors for the neon theme */
+    :root {
+        --accent-color: #00b0ff; /* Electric Blue */
+        --background-color: #080808; /* Near-black for deep contrast */
+    }
+
+    /* Apply Poppins font globally */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Custom accent color configuration for Tailwind */
+    .custom-accent {
+        color: var(--accent-color);
+    }
+    .custom-border {
+        border-color: var(--accent-color);
+    }
+    /* ENHANCED SHADOW FOR CIRCLE FRAME */
+    .custom-shadow {
+        box-shadow: 0 0 20px var(--accent-color); 
+    }
+
+    /* Primary Button Styling for Download CV (FIXED HOVER) */
+    .btn-primary {
+        background-color: var(--accent-color);
+        color: #080808; /* Dark text for high contrast */
+        transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+        box-shadow: 0 0 25px var(--accent-color);
+        transform: scale(1.02);
+    }
+
+    /* Card Base Styling (Aesthetics) */
+    .card {
+        background: #111111;
+        border-radius: 12px;
+        padding: 24px;
+        transition: all 0.3s ease;
+        border: 1px solid #1a1a1a;
+    }
+    .card:hover {
+        border-color: #00b0ff50;
+        box-shadow: 0 0 20px #00b0ff20;
+    }
+
+    /* Navigation Link Styling */
+    .nav-link {
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: #9ca3af; /* gray-400 */
+    }
+    .nav-link:hover {
+        color: var(--accent-color);
+    }
+    .nav-link.active {
+        color: var(--accent-color);
+        box-shadow: inset 0 -2px 0 0 var(--accent-color); /* Underline effect */
+    }
+
+    /* Project Filter Button Styling */
+    .filter-btn {
+        padding: 8px 16px;
+        margin: 4px;
+        border-radius: 9999px; /* Tailwind's rounded-full */
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid #333;
+        background-color: #1a1a1a;
+        color: #ddd;
+    }
+
+    .filter-btn:hover {
+        background-color: #2a2a2a;
+    }
+
+    .filter-btn.active {
+        background-color: var(--accent-color);
+        color: #080808;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    /* Page Section and Hidden Class for SPA routing */
+    .page-section {
+        /* Ensures smooth transition for display changes */
+        animation: fadeIn 0.5s ease-out;
+        min-height: 50vh; /* Minimum height for visual stability */
+    }
+    .page-section.hidden {
+        display: none;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* --- CSS for Skills Charts --- */
+    .circular-chart {
+        display: block;
+        max-width: 100px;
+        max-height: 100px;
+    }
+    .circle-bg {
+        fill: none;
+        stroke: #1a1a1a;
+        stroke-width: 5;
+    }
+    .circle {
+        fill: none;
+        stroke: var(--accent-color);
+        stroke-width: 5;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 1s ease-out;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+        box-shadow: 0 0 10px var(--accent-color);
+    }
+    .percentage {
+        font-weight: 700;
+        font-size: 1.125rem; /* text-xl */
+        fill: var(--accent-color);
+    }
+
+    /* --- TYPING ANIMATION STYLES (Kept for cursor) --- */
+    #role-typer {
+        /* Blinking cursor effect: using a border */
+        border-right: 2px solid transparent; 
+        padding-right: 4px;
+        white-space: nowrap; /* Prevent line breaks during typing */
+        overflow: hidden; /* Ensures the text is only as wide as the content */
+    }
+    
+    /* Blinking effect using a keyframe animation */
+    #role-typer.typing-active {
+        animation: blink-cursor 0.75s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+        from, to { border-color: transparent }
+        50% { border-color: var(--accent-color); }
+    }
+</style>
+</head>
+<body class="bg-[#080808] text-gray-100 min-h-screen">
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- STATIC HEADER SECTION (Name, Title, Photo, and Buttons) -->
+    <header class="mb-6 pb-6 border-b border-gray-800">
+        <div class="grid md:grid-cols-3 gap-10 items-center">
+            
+            <!-- LEFT COLUMN: Profile Image (Order 1 on mobile, 1 on desktop) -->
+            <div class="md:col-span-1 flex justify-center md:justify-start order-1">
+                <!-- Outer glowing frame: w-56 h-56 is 224px x 224px -->
+                <div class="w-56 h-56 rounded-full bg-[#111111] border-4 custom-border custom-shadow p-0.5">
+                    <!-- Image element inside the frame -->
+                    <img 
+                        src="Image4.png" 
+                        alt="Vikneshwari Raju Profile Picture" 
+                        class="w-full h-full rounded-full object-cover object-center"
+                        onerror="this.onerror=null;this.src='https://placehold.co/224x224/1a1a1a/00b0ff?text=VR'"
+                    >
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Name, Info, and Buttons (Order 2 on mobile, 2 on desktop) -->
+            <div class="md:col-span-2 order-2">
+                
+                <!-- Name and Title -->
+                <h1 class="text-4xl font-extrabold tracking-tight text-white mb-1">Vikneshwari Raju</h1>
+                <h2 class="text-xl font-semibold custom-accent mb-4 h-8">
+                    <!-- Dynamic Typing Text Span -->
+                    <span id="role-typer"></span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl">
+                    Final year student passionate about building secure applications, integrating voice-based technology, and contributing to modern web development. A dedicated collaborator and quick learner eager to solve complex problems.
+                </p>
+
+                <!-- Buttons/Social Links -->
+                <div class="mt-6 flex flex-col sm:flex-row items-center sm:items-start space-y-3 sm:space-y-0 sm:space-x-6">
+                    <a href="R.vikneshwari(1) resume.pdf" class="px-6 py-2 font-bold rounded-full btn-primary w-full sm:w-auto text-center" download>
+                        Download Resume
+                    </a>
+                    <div class="flex space-x-3 text-2xl">
+                        <a href="mailto:vikneshwariraju@gmail.com" class="custom-accent hover:text-white transition duration-300"><i class='bx bx-envelope'></i></a>
+                        <a href="https://www.linkedin.com/in/vikneshwari-raju-2b709a354/" target="_blank" class="custom-accent hover:text-white transition duration-300"><i class='bx bxl-linkedin-square'></i></a>
+                        <a href="https://github.com/vikneshwariraju" target="_blank" class="custom-accent hover:text-white transition duration-300"><i class='bx bxl-github'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION BAR (SPA ROUTING) -->
+    <nav id="navbar" class="sticky top-0 z-10 bg-[#080808] border-b border-gray-800 py-3 shadow-2xl shadow-[#00b0ff10]">
+        <div class="flex justify-center space-x-8">
+            <a href="#projects" class="nav-link" data-section="projects">Projects & Experience</a>
+            <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+            <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+        </div>
+    </nav>
+    
+    <!-- MAIN CONTENT CONTAINER - This is where the SPA content is rendered -->
+    <div id="page-content-container" class="mt-8 pb-12">
+
+        <!-- PAGE 1: PROJECTS & EXPERIENCE -->
+        <section id="page-projects" class="page-section space-y-8 grid lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- PROJECTS SUB-SECTION -->
+                <section id="projects-section">
+                    <h3 class="text-3xl font-bold custom-accent mb-6 pb-2 border-b border-gray-800">Projects</h3>
+                    
+                    <!-- Project Filter Buttons -->
+                    <div id="project-filters" class="flex flex-wrap gap-2 mb-8">
+                        <!-- Buttons will be added here by JavaScript -->
+                    </div>
+
+                    <!-- Project Cards Container -->
+                    <div id="project-list" class="space-y-6">
+                        <!-- Project cards will be rendered here by JavaScript -->
+                    </div>
+                </section>
+                
+                <!-- NEW EXPERIENCE SUB-SECTION -->
+                <section id="experience">
+                    <h3 class="text-3xl font-bold custom-accent mb-6 pb-2 border-b border-gray-800">Professional Experience</h3>
+                    
+                    <div class="card space-y-6">
+                        <!-- Example Internship/Experience Item -->
+                        <div class="relative pl-6 border-l-2 border-blue-500">
+                            <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#080808]"></div>
+                            <p class="text-sm font-semibold custom-accent">June 2024 - Aug 2024</p>
+                            <h4 class="text-xl font-bold text-white">Full-Stack Development Intern (Mock)</h4>
+                            <p class="text-gray-400">8Queens Software technologies Private Limited</p>
+                            <p class="text-gray-500 text-sm mt-2">Developed and deployed a secure user authentication module using Java Spring Boot and React. Contributed to unit testing and code review processes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- EDUCATION SUB-SECTION -->
+                <section id="education">
+                    <h3 class="text-3xl font-bold custom-accent mb-6 pb-2 border-b border-gray-800">Education</h3>
+                    
+                    <div class="card space-y-6">
+                        <!-- Timeline Item 1 -->
+                        <div class="relative pl-6 border-l-2 border-blue-500">
+                            <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#080808]"></div>
+                            <p class="text-sm font-semibold custom-accent">2021 - Present</p>
+                            <h4 class="text-xl font-bold text-white">B.E. Computer Science and Engineering</h4>
+                            <p class="text-gray-400">Sir Issac Newton College Of Engineering, Nagappatinam</p>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative pl-6 border-l-2 border-blue-500">
+                            <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#080808]"></div>
+                            <p class="text-sm font-semibold custom-accent">2019 - 2021</p>
+                            <h4 class="text-xl font-bold text-white">Higher Secondary Education (HSC)</h4>
+                            <p class="text-gray-400">Karaikal Ammayar Higher Secondary School, Karaikal</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="space-y-8 lg:col-span-1">
+                <!-- Empty column on the Projects page for possible future widgets -->
+            </div>
+            
+        </section> <!-- End Page 1 -->
+
+        <!-- PAGE 2: SKILLS OVERVIEW -->
+        <section id="page-skills" class="page-section hidden">
+            <h3 class="text-3xl font-bold custom-accent mb-6 pb-2 border-b border-gray-800">Skills Overview</h3>
+                
+            <div class="card grid md:grid-cols-2 gap-8">
+                
+                <!-- 1. Technical Skills (Grid of Text Blocks) -->
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4 custom-accent">Technical Skills</h4>
+                    <!-- Use grid to display skills side-by-side on larger screens -->
+                    <div id="technical-skills-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Technical skills rendered here as text blocks -->
+                    </div>
+                </div>
+
+                <!-- 2. Professional Skills (Circular Charts) -->
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4 custom-accent">Professional Skills</h4>
+                    <div id="professional-skills-list" class="grid grid-cols-2 gap-y-8 gap-x-4 justify-items-center">
+                        <!-- Professional skills rendered here -->
+                    </div>
+                </div>
+
+            </div>
+        </section> <!-- End Page 2 -->
+
+        <!-- PAGE 3: CONTACT SECTION -->
+        <section id="page-contact" class="page-section hidden mt-12">
+            <h3 class="text-3xl font-bold custom-accent mb-6 pb-2 border-b border-gray-800">Get In Touch</h3>
+            <div class="card p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Left Column: Intro and Direct Info -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-white mb-4">Let's Work Together</h4>
+                        <p class="text-gray-400 mb-6">
+                            I'm actively seeking internship opportunities and collaborations in voice-based technology and full-stack development. Feel free to reach out directly or use the form.
+                        </p>
+
+                        <!-- Direct Contact Details -->
+                        <div class="space-y-3">
+                            <p class="flex items-center text-gray-300">
+                                <i class='bx bx-envelope mr-3 custom-accent text-2xl'></i>
+                                vikneshwariraju@gmail.com
+                            </p>
+                            <p class="flex items-center text-gray-300">
+                                <i class='bx bx-phone mr-3 custom-accent text-2xl'></i>
+                                +91 7708398743
+                            </p>
+                            <p class="flex items-start text-gray-300">
+                                <i class='bx bx-map-pin mr-3 custom-accent text-2xl flex-shrink-0'></i>
+                                4/4 1st Floor, 2nd House, Neela Vadakuveethi, Satt Nagapattinam, TamilNadu 609108
+                            </p>
+                        </div>
+                        
+                        <!-- Social Icons for Contact Section -->
+                        <div class="flex space-x-4 text-3xl mt-6">
+                            <a href="mailto:vikneshwariraju@gmail.com" class="custom-accent hover:text-white transition duration-300"><i class='bx bxl-google-plus-circle'></i></a>
+                            <a href="https://www.linkedin.com/in/vikneshwari-raju-2b709a354/" target="_blank" class="custom-accent hover:text-white transition duration-300"><i class='bx bxl-linkedin'></i></a>
+                            <a href="https://github.com/vikneshwariraju" target="_blank" class="custom-accent hover:text-white transition duration-300"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Contact Form -->
+                    <div>
+                        <!-- FORM SUBMISSION INTEGRATION using FormSubmit -->
+                        <form action="https://formsubmit.co/vikneshwariraju@gmail.com" method="POST" class="space-y-4">
+                            <!-- Hidden field for spam prevention (Honeypot) -->
+                            <input type="hidden" name="_honeypot" value="contact_form_bot_trap">
+                            <!-- Hidden field to redirect user back to the contact page after submission -->
+                            <input type="hidden" name="_next" value="${window.location.href}#contact"> 
+
+                            <input type="text" name="name" placeholder="Enter Your Name" required
+                                class="w-full p-4 rounded-lg bg-[#222] border-2 border-[#333] focus:border-blue-500 text-gray-200 focus:outline-none transition duration-200">
+                            
+                            <input type="email" name="email" placeholder="Enter Your Email" required
+                                class="w-full p-4 rounded-lg bg-[#222] border-2 border-[#333] focus:border-blue-500 text-gray-200 focus:outline-none transition duration-200">
+                            
+                            <!-- Using _subject allows the user's input to become the email subject line -->
+                            <input type="text" name="_subject" placeholder="Enter Your Subject" required
+                                class="w-full p-4 rounded-lg bg-[#222] border-2 border-[#333] focus:border-blue-500 text-gray-200 focus:outline-none transition duration-200">
+                            
+                            <textarea name="message" placeholder="Enter Your Message" rows="5" required
+                                    class="w-full p-4 rounded-lg bg-[#222] border-2 border-[#333] focus:border-blue-500 text-gray-200 focus:outline-none transition duration-200 resize-none"></textarea>
+                            
+                            <!-- Submit Button -->
+                            <button type="submit" 
+                                    class="w-full py-4 text-lg font-bold rounded-full btn-primary block mt-6"
+                                    style="box-shadow: 0 0 25px var(--accent-color);">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section> <!-- End Page 3 -->
+        
+    </div>
+
+</div>
+
+<footer class="text-center py-6 border-t border-gray-800 mt-10">
+    <p class="text-gray-500 text-sm">
+        © 2025 Vikneshwari Raju. Built with passion & <span class="custom-accent">Tailwind CSS</span>.
+        <span class="text-gray-700 mx-2">|</span> 
+        <span class="custom-accent font-semibold">Available for Internships</span>
+    </p>
+</footer>
+
+<script>
+    // --- TYPING ANIMATION LOGIC (UPDATED WITH SCRAMBLE EFFECT) ---
+    const roles = [
+        "B.E. Computer Science & Engineering Student", 
+        "Full Stack Developer", 
+        "UI & UX Designer"
+    ];
+    const typerElement = document.getElementById('role-typer');
+    let roleIndex = 0;
+    let charIndex = 0;
+    const typingSpeed = 100; // ms per character
+    const delayBetweenRoles = 2000; // ms to wait after typing/deleting
+    const scrambleChars = "!<>-_\\/[]{}—=+*^?#________"; // Characters used for the scramble/glitch effect
+
+
+    function typeWriter() {
+        const currentRole = roles[roleIndex];
+        // Add class to activate blinking cursor while typing
+        typerElement.classList.add('typing-active');
+
+        // Typing logic
+        if (charIndex < currentRole.length) {
+            typerElement.textContent += currentRole.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, typingSpeed);
+        } 
+        // Pause after typing is complete
+        else {
+            setTimeout(scrambleText, delayBetweenRoles);
+        }
+    }
+
+    // New function to scramble the text out instead of deleting character-by-character
+    function scrambleText() {
+        const currentText = typerElement.textContent;
+        let frame = 0;
+        const totalFrames = currentText.length;
+        
+        // Fast interval for rapid scrambling
+        const scrambleInterval = setInterval(() => {
+            let output = "";
+            let done = 0;
+
+            for (let i = 0; i < currentText.length; i++) {
+                if (frame / 2 > i) {
+                    // Characters already finished scrambling (empty space)
+                    output += " ";
+                    done++;
+                } else if (frame / 2 <= i && frame / 2 + 3 > i) {
+                    // The scrambling zone (shows random chars)
+                    const randomChar = scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                    output += randomChar;
+                } else {
+                    // Characters yet to be scrambled (original character remains)
+                    output += currentText[i];
+                }
+            }
+
+            typerElement.textContent = output;
+            frame++;
+
+            if (done === currentText.length) {
+                clearInterval(scrambleInterval);
+                typerElement.textContent = ""; // Final clear
+                
+                // Advance to the next role and start typing
+                typerElement.classList.remove('typing-active'); 
+                roleIndex = (roleIndex + 1) % roles.length;
+                charIndex = 0;
+                setTimeout(typeWriter, 500); // Small delay before starting new word
+            }
+        }, 30); // Very fast frame rate (30ms) for the glitch effect
+    }
+
+
+    // --- SKILLS DATA ---
+    const technicalSkills = [
+        { name: "Python", percent: 60 },
+        { name: "Java", percent: 75 },
+        { name: "HTML/CSS", percent: 50 }, 
+        { name: "JavaScript", percent: 60 },
+        { name: "SQL", percent: 80 },
+        { name: "Git & Version Control", percent: 90 },
+    ];
+
+    const professionalSkills = [
+        { name: "Problem Solving", percent: 85 },
+        { name: "Teamwork", percent: 90 },
+        { name: "Communication", percent: 88 },
+        { name: "Time Management", percent: 78 },
+    ];
+
+    // --- PROJECT DATA (Updated to remove live demo from Voice Navigation) ---
+    const projectsData = [
+        {
+            title: "Voice-Based Authentication",
+            description: "Built a secure authentication system using speech recognition techniques for enhanced user verification and security, providing a hands-free login method.",
+            tags: ["Speech", "ML", "Security"],
+            categories: ["Speech", "ML"],
+            date: "May 2024", 
+            repoUrl: "https://github.com/vikneshwariraju/voice-Based-Authentication",
+            liveUrl: null // Placeholder for Live Demo
+        },
+        {
+            title: "Voice Navigation System",
+            description: "Created a hands-free mobile application prototype to assist users by allowing them to control navigation and app features purely through voice commands.",
+            tags: ["Mobile UI", "Voice Commands", "Prototyping"],
+            categories: ["Web", "Speech"],
+            date: "Jan 2024", 
+            repoUrl: "https://github.com/vikneshwariraju/voice-based-navigation",
+            liveUrl: null // Live demo removed as requested
+        },
+        {
+            title: "Language Translator (Speech-to-Speech)",
+            description: "Developed a comprehensive system for real-time language translation, utilizing speech recognition and text-to-speech APIs to facilitate cross-lingual communication.",
+            tags: ["NLP", "Speech", "Translation", "API Integration"],
+            categories: ["NLP", "Speech"],
+            date: "Dec 2023", 
+            repoUrl: "https://github.com/vikneshwariraju/language-translation-through-speech",
+            liveUrl: null // No Live Demo
+        }
+    ];
+
+    const filterCategories = ["All", "Web", "ML", "NLP", "Speech"];
+    const projectListContainer = document.getElementById('project-list');
+    const filterButtonsContainer = document.getElementById('project-filters');
+    const techSkillsContainer = document.getElementById('technical-skills-list');
+    const profSkillsContainer = document.getElementById('professional-skills-list');
+
+
+    // --- SPA ROUTING LOGIC ---
+
+    // Function to show the correct page and update navigation links
+    function showSection(hash) {
+        const sectionName = (hash || '#projects').replace('#', ''); 
+        const targetPageId = `page-${sectionName}`;
+        
+        // 1. Hide all pages
+        document.querySelectorAll('.page-section').forEach(section => {
+            section.classList.add('hidden');
+        });
+
+        // 2. Show the target page
+        const targetPage = document.getElementById(targetPageId);
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+        }
+
+        // 3. Update navigation active state
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-section') === sectionName) {
+                link.classList.add('active');
+            }
+        });
+
+        // 4. Scroll to the top of the main content area
+        document.getElementById('page-content-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Handle initial load and hash changes
+    function handleRouting() {
+        const currentHash = window.location.hash;
+        showSection(currentHash);
+        
+        if (currentHash === '#projects' || currentHash === '') {
+            renderProjects('All');
+        }
+        if (currentHash === '#skills') {
+            initSkills();
+        }
+    }
+
+    // --- UTILITY & RENDERING FUNCTIONS ---
+
+    // Function updated to render skill name only
+    function renderTechnicalSkill(skill) {
+        // Apply styling for a clean, professional box/card
+        return `
+            <div class="card p-4 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition duration-300 text-center">
+                <span class="text-gray-300 font-medium text-lg">${skill.name}</span>
+            </div>
+        `;
+    }
+
+    function renderProfessionalSkill(skill) {
+        const radius = 40;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (skill.percent / 100) * circumference;
+
+        return `
+            <div class="text-center">
+                <div class="relative flex justify-center items-center w-24 h-24">
+                    <svg class="circular-chart" viewBox="0 0 100 100">
+                        <circle class="circle-bg" cx="50" cy="50" r="${radius}"></circle>
+                        <circle class="circle" 
+                                cx="50" cy="50" r="${radius}" 
+                                stroke-dasharray="${circumference} ${circumference}" 
+                                style="stroke-dashoffset: ${offset}"></circle>
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="percentage">${skill.percent}%</text>
+                    </svg>
+                </div>
+                <p class="text-sm font-medium text-gray-300 mt-2">${skill.name}</p>
+            </div>
+        `;
+    }
+
+    function initSkills() {
+        // Now renders only the skill name in a box
+        techSkillsContainer.innerHTML = technicalSkills.map(renderTechnicalSkill).join('');
+        profSkillsContainer.innerHTML = professionalSkills.map(renderProfessionalSkill).join('');
+    }
+
+    function renderProjectCard(project) {
+        // Conditional button for Live Demo (Checks for truthy value and not just '#')
+        const liveDemoButton = project.liveUrl && project.liveUrl !== '#'
+            ? `
+                <a href="${project.liveUrl}" target="_blank" 
+                   class="px-4 py-2 text-sm font-bold rounded-full border border-gray-600 custom-accent 
+                          hover:border-blue-500 hover:text-white transition duration-300 flex items-center justify-center 
+                          sm:w-auto w-full order-1">
+                    <i class='bx bx-link-external text-lg mr-2'></i> Live Demo
+                </a>
+              ` 
+            : '';
+        
+        // Use a placeholder URL for Voice-Based Authentication so it shows the button
+        const finalLiveDemoButton = (project.title === "Voice-Based Authentication" && project.liveUrl === "#")
+            ? `
+                <a href="${project.liveUrl}" 
+                   class="px-4 py-2 text-sm font-bold rounded-full border border-gray-600 custom-accent 
+                          hover:border-blue-500 hover:text-white transition duration-300 flex items-center justify-center 
+                          sm:w-auto w-full order-1">
+                    <i class='bx bx-link-external text-lg mr-2'></i> Live Demo
+                </a>
+              `
+            : liveDemoButton;
+
+
+        return `
+            <div class="card project-card ${project.categories.join(' ')}" data-category="${project.categories.join(',')}">
+                <h4 class="text-2xl font-bold mb-1 text-white">${project.title}</h4>
+                <p class="text-sm font-semibold custom-accent mb-3">${project.date}</p>
+                <p class="text-gray-400 mb-3">${project.description}</p>
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4">
+                    <div class="flex flex-wrap gap-3 text-sm font-medium mb-4 sm:mb-0">
+                        ${project.tags.map(tag => `<span class="custom-accent">${tag}</span>`).join('')}
+                    </div>
+                    
+                    <!-- Buttons Container (Note: Reverse order on mobile for better flow) -->
+                    <div class="flex gap-4 flex-col sm:flex-row">
+                        ${finalLiveDemoButton}
+                        <a href="${project.repoUrl}" target="_blank" 
+                           class="px-4 py-2 text-sm font-bold rounded-full border border-gray-600 custom-accent 
+                                  hover:border-blue-500 hover:text-white transition duration-300 flex items-center justify-center 
+                                  sm:w-auto w-full order-2 sm:order-2">
+                            <i class='bx bxl-github text-lg mr-2'></i> View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderProjects(filter = 'All') {
+        if (!projectListContainer) return;
+
+        projectListContainer.innerHTML = '';
+        projectsData.forEach(project => {
+            const cardHtml = renderProjectCard(project);
+            
+            if (filter === 'All' || project.categories.includes(filter)) {
+                projectListContainer.insertAdjacentHTML('beforeend', cardHtml);
+            }
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+        if(activeBtn) activeBtn.classList.add('active');
+    }
+
+    function handleFilterClick(event) {
+        const target = event.target;
+        if (target.classList.contains('filter-btn')) {
+            const filterValue = target.getAttribute('data-filter');
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            target.classList.add('active');
+            
+            const cards = document.querySelectorAll('#project-list .card');
+            cards.forEach(card => {
+                const categories = card.getAttribute('data-category').split(',');
+                if (filterValue === 'All' || categories.includes(filterValue)) {
+                    card.style.display = 'block'; 
+                    card.style.opacity = 1;
+                    card.style.transform = 'scale(1)';
+                } else {
+                    card.style.display = 'none'; 
+                    card.style.opacity = 0;
+                    card.style.transform = 'scale(0.9)';
+                }
+            });
+        }
+    }
+
+    function initFilters() {
+        filterButtonsContainer.innerHTML = '';
+        filterCategories.forEach(category => {
+            const button = document.createElement('button');
+            button.className = 'filter-btn';
+            button.textContent = category;
+            button.setAttribute('data-filter', category);
+            filterButtonsContainer.appendChild(button);
+        });
+
+        document.querySelector('.filter-btn[data-filter="All"]').classList.add('active');
+        filterButtonsContainer.removeEventListener('click', handleFilterClick);
+        filterButtonsContainer.addEventListener('click', handleFilterClick);
+    }
+    
+    // Initialize all dynamic components
+    function initializeApp() {
+        initFilters();
+        initSkills(); 
+        handleRouting();
+        // Start the typing animation after initial load
+        typeWriter();
+    }
+    
+    // Add listeners
+    window.addEventListener('hashchange', handleRouting);
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!window.location.hash) {
+            window.location.hash = '#projects';
+        }
+        initializeApp();
+    });
+</script>
+</body>
+</html>
