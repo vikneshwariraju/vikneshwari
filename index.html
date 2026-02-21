@@ -56,6 +56,21 @@
         box-shadow: 0 0 20px #00b0ff20;
     }
 
+     /* --- BENTO SKILLS --- */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+    .glass-card:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: var(--accent-color);
+        transform: translateY(-5px);
+    }
+
+
+
     /* Navigation Link Styling */
     .nav-link {
         transition: all 0.3s ease;
@@ -330,17 +345,59 @@
         <!-- PAGE 2: SKILLS OVERVIEW -->
         <section id="page-skills" class="page-section hidden">
             <h3 class="text-3xl font-bold custom-accent mb-6 pb-2 border-b border-gray-800">Skills Overview</h3>
-                
-            <div class="card grid md:grid-cols-2 gap-8">
-                
                 <!-- 1. Technical Skills (Grid of Text Blocks) -->
-                <div>
+                
                     <h4 class="text-xl font-semibold text-white mb-4 custom-accent">Technical Skills</h4>
-                    <!-- Use grid to display skills side-by-side on larger screens -->
-                    <div id="technical-skills-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <!-- Technical skills rendered here as text blocks -->
+        
+
+            <section id="page-skills" class="page-section hidden">
+                <div class="max-w-6xl mx-auto reveal active">
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-2">Technical Arsenal</h2>
+                        <p class="text-gray-500">My toolbelt for solving modern engineering challenges.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="p-8 glass-card rounded-3xl flex flex-col items-center justify-center text-center">
+                            <i class="fab fa-python text-4xl text-blue-400 mb-4"></i>
+                            <h4 class="font-bold uppercase tracking-tight text-sm">Python</h4>
+                            <p class="text-[10px] text-gray-500 mt-2">Numpy, Matplotlib, ML</p>
+                        </div>
+                        <div class="p-8 glass-card rounded-3xl flex flex-col items-center justify-center text-center">
+                            <i class="fab fa-java text-4xl text-orange-400 mb-4"></i>
+                            <h4 class="font-bold uppercase tracking-tight text-sm">Java</h4>
+                            <p class="text-[10px] text-gray-500 mt-2">Core Dev & Algorithms</p>
+                        </div>
+                        <div class="p-8 glass-card rounded-3xl flex flex-col items-center justify-center text-center">
+                            <i class="fas fa-brain text-4xl text-purple-400 mb-4"></i>
+                            <h4 class="font-bold uppercase tracking-tight text-sm">AI / APIs</h4>
+                            <p class="text-[10px] text-gray-500 mt-2">OpenAI, Speech Recognition</p>
+                        </div>
+                        <div class="p-8 glass-card rounded-3xl flex flex-col items-center justify-center text-center">
+                            <i class="fas fa-database text-4xl text-emerald-400 mb-4"></i>
+                            <h4 class="font-bold uppercase tracking-tight text-sm">Database</h4>
+                            <p class="text-[10px] text-gray-500 mt-2">MySQL & Data Analytics</p>
+                        </div>
+                        <div class="p-6 glass-card rounded-3xl col-span-2 flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center">
+                                <i class="fab fa-figma text-3xl text-pink-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase">UI/UX Design</h4>
+                                <p class="text-xs text-gray-500">Masterclass in Figma & Design Principles.</p>
+                            </div>
+                        </div>
+                        <div class="p-6 glass-card rounded-3xl col-span-2 flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center">
+                                <i class="fab fa-git-alt text-3xl text-orange-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase">Version Control</h4>
+                                <p class="text-xs text-gray-500">Expertise in Git/Github & Agile workflows.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
                 <!-- 2. Professional Skills (Circular Charts) -->
                 <div>
