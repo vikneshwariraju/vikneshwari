@@ -247,6 +247,16 @@
             <a href="#contact" class="nav-link" data-section="contact">Contact</a>
         </div>
     </nav>
+
+    
+    <nav class="side-nav-dock">
+        <a href="#home" class="nav-pill-item active" data-section="home" onclick="showSection('home')"><i class='bx bxs-home-circle'></i></a>
+        <a href="#about" class="nav-pill-item" data-section="about" onclick="showSection('about')"><i class='bx bxs-user-detail'></i></a>
+        <a href="#projects" class="nav-pill-item" data-section="projects" onclick="showSection('projects')"><i class='bx bxs-grid-alt'></i></a>
+        <a href="#skills" class="nav-pill-item" data-section="skills" onclick="showSection('skills')"><i class='bx bxs-bar-chart-square'></i></a>
+        <a href="#contact" class="nav-pill-item" data-section="contact" onclick="showSection('contact')"><i class='bx bxs-envelope'></i></a>
+    </nav>
+
     
     <!-- MAIN CONTENT CONTAINER - This is where the SPA content is rendered -->
     <div id="page-content-container" class="mt-8 pb-12">
@@ -763,6 +773,25 @@
         }
         initializeApp();
     });
+    // SIDE NAV CLICK HANDLER
+document.querySelectorAll('.nav-pill-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const section = item.getAttribute('data-section');
+        window.location.hash = "#" + section;
+
+        // highlight active
+        document.querySelectorAll('.nav-pill-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+    });
+});
+
+// Update active on same route changes
+window.addEventListener('hashchange', () => {
+    const section = window.location.hash.replace('#','');
+    document.querySelectorAll('.nav-pill-item').forEach(i => {
+        i.classList.toggle('active', i.getAttribute('data-section') === section);
+    });
+});
 </script>
 </body>
 </html>
