@@ -7,6 +7,7 @@
 <!-- Load Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
     /* Configure custom styles and colors for the neon theme */
     :root {
@@ -106,6 +107,7 @@
         z-index: 1000;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
+     @media (max-width: 768px) { .side-nav-dock { display: none; } }
 
     .nav-pill-item {
         color: rgba(255, 255, 255, 0.3);
@@ -158,50 +160,17 @@
     }
     
     /* --- CSS for Skills Charts --- */
-    .circular-chart {
-        display: block;
-        max-width: 100px;
-        max-height: 100px;
-    }
-    .circle-bg {
-        fill: none;
-        stroke: #1a1a1a;
-        stroke-width: 5;
-    }
-    .circle {
-        fill: none;
-        stroke: var(--accent-color);
-        stroke-width: 5;
-        stroke-linecap: round;
-        transition: stroke-dashoffset 1s ease-out;
-        transform: rotate(-90deg);
-        transform-origin: 50% 50%;
-        box-shadow: 0 0 10px var(--accent-color);
-    }
-    .percentage {
-        font-weight: 700;
-        font-size: 1.125rem; /* text-xl */
-        fill: var(--accent-color);
-    }
+      .circular-chart { max-width: 100px; }
+        .circle-bg { fill: none; stroke: #1a1a1a; stroke-width: 4; }
+        .circle { 
+            fill: none; stroke: var(--accent-color); stroke-width: 4; 
+            stroke-linecap: round; transition: stroke-dashoffset 1.5s ease;
+            transform: rotate(-90deg); transform-origin: 50% 50%;
+        }
 
-    /* --- TYPING ANIMATION STYLES (Kept for cursor) --- */
-    #role-typer {
-        /* Blinking cursor effect: using a border */
-        border-right: 2px solid transparent; 
-        padding-right: 4px;
-        white-space: nowrap; /* Prevent line breaks during typing */
-        overflow: hidden; /* Ensures the text is only as wide as the content */
-    }
-    
-    /* Blinking effect using a keyframe animation */
-    #role-typer.typing-active {
-        animation: blink-cursor 0.75s step-end infinite;
-    }
-
-    @keyframes blink-cursor {
-        from, to { border-color: transparent }
-        50% { border-color: var(--accent-color); }
-    }
+        #role-typer { border-right: 2px solid transparent; padding-right: 4px; }
+        #role-typer.typing-active { animation: blink-cursor 0.75s step-end infinite; }
+        @keyframes blink-cursor { from, to { border-color: transparent } 50% { border-color: var(--accent-color); } }
 </style>
 </head>
 <body class="bg-[#080808] text-gray-100 min-h-screen">
