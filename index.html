@@ -182,21 +182,19 @@
         <div class="grid md:grid-cols-3 gap-10 items-center">
             
             <!-- LEFT COLUMN: Profile Image (Order 1 on mobile, 1 on desktop) -->
-            <div class="md:col-span-1 flex justify-center md:justify-start order-1">
+            <div class="md:col-span-1 flex justify-center md:justify-start">
                 <!-- Outer glowing frame: w-56 h-56 is 224px x 224px -->
-                <div class="w-56 h-56 rounded-full bg-[#111111] border-4 custom-border custom-shadow p-0.5">
+                <div class="w-56 h-56 rounded-full bg-[#111111] border-4 custom-border custom-shadow p-1 overflow-hidden">
                     <!-- Image element inside the frame -->
                     <img 
                         src="Image4.png" 
                         alt="Vikneshwari Raju Profile Picture" 
-                        class="w-full h-full rounded-full object-cover object-center"
-                        onerror="this.onerror=null;this.src='https://placehold.co/224x224/1a1a1a/00b0ff?text=VR'"
-                    >
+                        class="w-full h-full rounded-full object-cover">
                 </div>
             </div>
 
             <!-- RIGHT COLUMN: Name, Info, and Buttons (Order 2 on mobile, 2 on desktop) -->
-            <div class="md:col-span-2 order-2">
+            <div class="md:col-span-2">
                 
                 <!-- Name and Title -->
                 <h1 class="text-4xl font-extrabold tracking-tight text-white mb-1">Vikneshwari Raju</h1>
