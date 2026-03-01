@@ -173,19 +173,15 @@
         @keyframes blink-cursor { from, to { border-color: transparent } 50% { border-color: var(--accent-color); } }
 </style>
 </head>
-<body class="bg-[#080808] text-gray-100 min-h-screen">
+<body class="bg-[#080808]">
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-    <!-- STATIC HEADER SECTION (Name, Title, Photo, and Buttons) -->
-    <header class="mb-6 pb-6 border-b border-gray-800">
-        <div class="grid md:grid-cols-3 gap-10 items-center">
-            
-            <!-- LEFT COLUMN: Profile Image (Order 1 on mobile, 1 on desktop) -->
-            <div class="md:col-span-1 flex justify-center md:justify-start">
-                <!-- Outer glowing frame: w-56 h-56 is 224px x 224px -->
-                <div class="w-56 h-56 rounded-full bg-[#111111] border-4 custom-border custom-shadow p-1 overflow-hidden">
-                    <!-- Image element inside the frame -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- STATIC HEADER -->
+        <header class="mb-6 pb-10 border-b border-gray-800">
+            <div class="grid md:grid-cols-3 gap-10 items-center">
+                <div class="md:col-span-1 flex justify-center md:justify-start">
+                    <div class="w-56 h-56 rounded-full bg-[#111111] border-4 custom-border custom-shadow p-1 overflow-hidden">                <!-- Image element inside the frame -->
                     <img 
                         src="Image4.png" 
                         alt="Vikneshwari Raju Profile Picture" 
@@ -195,13 +191,10 @@
 
             <!-- RIGHT COLUMN: Name, Info, and Buttons (Order 2 on mobile, 2 on desktop) -->
             <div class="md:col-span-2">
-                
-                <!-- Name and Title -->
-                <h1 class="text-4xl font-extrabold tracking-tight text-white mb-1">Vikneshwari Raju</h1>
-                <h2 class="text-xl font-semibold custom-accent mb-4 h-8">
-                    <!-- Dynamic Typing Text Span -->
-                    <span id="role-typer"></span>
-                </h2>
+                <h1 class="text-4xl font-extrabold text-white mb-2">Vikneshwari Raju</h1>
+                    <h2 class="text-xl font-semibold custom-accent mb-4 h-8">
+                        <span id="role-typer"></span>
+                    </h2>
                 <p class="text-gray-400 max-w-2xl">
                     Final year student passionate about building secure applications, integrating voice-based technology, and contributing to modern web development. A dedicated collaborator and quick learner eager to solve complex problems.
                 </p>
